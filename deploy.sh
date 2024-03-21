@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd ../
 mkdir work 
 cd work
 export GOPATH=$PWD
@@ -97,8 +96,7 @@ else
     echo "Failed to create TABLE patient_data."
 fi
 
-#克隆私有仓库
-git clone https://github.com/HenryRuis/Vedrfolnir.git
+
 
 
 
