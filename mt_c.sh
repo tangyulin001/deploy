@@ -2,7 +2,7 @@
 
 for i in {1..5}
 do
-sed "s/LIMIT 10000/LIMIT $((${i}*10))/" ./daemon/main.go > ./daemon/new.go
+sed "s/LIMIT 10000/LIMIT $((${i}*100000))/" ./daemon/main.go > ./daemon/new.go
 docker build --network=host -t "mt-${i}" .
 sleep 30s
 echo "LIMIT $((${i}*100000)):" >> ../../mt-out-2and3.txt
