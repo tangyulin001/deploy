@@ -4,7 +4,7 @@ wget -O openmrs-2-2-1.sql.gz "https://openmrs.atlassian.net/wiki/download/attach
 gunzip openmrs-2-2-1.sql.gz
 docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root1234 --name mysql-ct mysql:latest
 docker cp openmrs-2-2-1.sql mysql_container:.
-docker exec -it mysql_container sh -c 'mysql -uroot -p"root1234" -e "CREATE DATABASE IF NOT EXISTS foo;";mysql -u root -p"root1234" foo < openmrs-2-2-1.sql;mysql -u root -p"root1234" <<EOF
+docker exec -it mysql_ct sh -c 'mysql -uroot -p"root1234" -e "CREATE DATABASE IF NOT EXISTS foo;";mysql -u root -p"root1234" foo < openmrs-2-2-1.sql;mysql -u root -p"root1234" <<EOF
 USE foo;
 CREATE VIEW Vedrfolnir AS
 SELECT
