@@ -40,8 +40,9 @@ for i in {1..5}
 do
 sed "s/LIMIT 10000/LIMIT $((${i}*10000))/" ./daemon/main.go > ./daemon/new.go
 docker build --network=host -t "mt-${i}" .
+echo "LIMIT $((${i}*10000)):" >> output.txt
 wait
-docker run --rm --net=host --name "mt-${i}" "mt-${i}" > "output${i}.txt"
+docker run --rm --net=host --name "mt-${i}" "mt-${i}" >> "output.txt"
 wait 
 #docker kill "mt-${i}"
 #docker rm -f "mt-${i}"
