@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export n=2
 git clone https://github.com/HenryRuis/Merkle2Test.git
 sleep 3
 cd Merkle2Test
@@ -17,6 +18,7 @@ echo -e "\033[0;32m第二次测试开始...\033[0m"
 if [ $? -eq 0 ]; then
 echo -e "\033[0;32m第二次测试完成\033[0m"
 echo -e "\033[0;32m第三次测试开始...\033[0m"
+n=3
 . ../mt_c.sh
 if [ $? -eq 0 ]; then
 echo -e "\033[0;32m第三次测试完成\033[0m"

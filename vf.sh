@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export n=1
 cd Vedrfolnir
 touch Dockerfile
 chmod a+x Dockerfile
@@ -14,10 +15,12 @@ echo -e "\033[0;32m第一次测试开始...\033[0m"
 if [ $? -eq 0 ]; then
 echo -e "\033[0;32m第一次测试完成\033[0m"
 echo -e "\033[0;32m第二次测试开始...\033[0m"
+n=2
 . ../vf_c.sh
 if [ $? -eq 0 ]; then
 echo -e "\033[0;32m第二次测试完成\033[0m"
 echo -e "\033[0;32m第三次测试开始...\033[0m"
+n=3
 . ../vf_c.sh
 if [ $? -eq 0 ]; then
 echo -e "\033[0;32m第三次测试完成\033[0m"

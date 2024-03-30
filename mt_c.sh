@@ -5,6 +5,8 @@ do
 sed "s/LIMIT 10000/LIMIT $((${i}*100000))/" ./daemon/main.go > ./daemon/new.go
 docker build --network=host -t "mt-${i}" .
 sleep 30s
+echo "" >> ../../mt-out-2and3.txt
+echo "第${n}次测试..." >> ../../mt-out-2and3.txt
 echo "LIMIT $((${i}*100000)):" >> ../../mt-out-2and3.txt
 sleep 1
 docker run --rm --net=host --name "mt-${i}" "mt-${i}" >> ../../mt-out-2and3.txt
