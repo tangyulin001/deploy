@@ -4,8 +4,10 @@ wget -O openmrs-2-2-1.sql.gz "https://openmrs.atlassian.net/wiki/download/attach
 gunzip openmrs-2-2-1.sql.gz
 docker run -d -p 3307:3306 -e MYSQL_ROOT_PASSWORD=root1234 --name mysql-ct mysql:latest
 docker cp openmrs-2-2-1.sql mysql-ct:.
-#sleep 10
-docker exec -it mysql-ct sh -c 'mysql -uroot -p"root1234" -e "CREATE DATABASE IF NOT EXISTS foo;";mysql -u root -p"root1234" foo < openmrs-2-2-1.sql;mysql -u root -p"root1234" <<EOF
+sleep 10
+mysql -h 0.0.0.0 -P 3307 -uroot -p"root1234" -e "CREATE DATABASE IF NOT EXISTS foo;"
+mysql -h 0.0.0.0 -P 3307 -u root -p"root1234" foo < openmrs-2-2-1.sql
+mysql -h 0.0.0.0 -P 3307 -u root -p"root1234" <<EOF
 USE foo;
 CREATE VIEW Vedrfolnir AS
 SELECT
@@ -22,6 +24,5 @@ JOIN
 JOIN
     concept_name cn ON o.concept_id = cn.concept_id;
 EOF
-mysql -u root -p"root1234" -e "USE foo;CREATE TABLE patient_data (patient_id INT,ciphertext BLOB,hash CHAR(64));"'
-
+mysql -h 0.0.0.0 -P 3307 -uroot -p"root1234" -e "USE foo;CREATE TABLE patient_data (patient_id INT,ciphertext BLOB,hash CHAR(64));"
 
