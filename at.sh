@@ -20,7 +20,9 @@ WORKDIR /rust/app
 COPY . .
 RUN mkdir ~/.cargo && \
     echo '[source.crates-io]' > ~/.cargo/config && \
-    echo 'registry = \"https://mirrors.ustc.edu.cn/crates.io-index\"' >> ~/.cargo/config
+    echo \"replace-with = 'rsproxy'\" >> ~/.cargo/config && \
+    echo '[source.rsproxy]' >> ~/.cargo/config && \
+    echo 'registry = \"https://rsproxy.cn/crates.io-index\"' >> ~/.cargo/config
 RUN cargo build --bin new --release
 CMD [\"./target/release/new\"]" > Dockerfile
 fi
