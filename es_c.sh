@@ -3,7 +3,7 @@
 #the content of one test
 for i in {1..5}
 do
-sed "s/LIMIT 100/LIMIT $((${i}*100000))/g" ./daemon/main.go > ./daemon/new2.go
+sed "s/LIMIT 100/LIMIT $((${i}*100000))/g" ./daemon/test_encrypt.go > ./daemon/new2.go
 docker build --no-cache --network=host -t "es_${i}" .
 echo "" >> ../../output/es_out.txt
 echo "第${n}次测试..." >> ../../output/es_out.txt
