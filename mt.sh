@@ -2,7 +2,6 @@
 
 export n=1
 git clone https://github.com/HenryRuis/Merkle2Test.git
-sleep 3
 cd Merkle2Test
 
 #write Dockerfile
