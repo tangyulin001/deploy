@@ -1,6 +1,9 @@
 #!/bin/bash
 
 export n=1
+
+. ./utils
+
 cd Vedrfolnir
 
 #write Dockerfile
@@ -13,25 +16,36 @@ ENV GOPROXY=https://goproxy.cn
 COPY . .
 RUN go run ./daemon/new2.go > out.txt
 CMD ["cat","out.txt"]' > Dockerfile
+else 
+infoln "Dockerfile already exists"
 fi 
 
+if [ $? -eq 0 ]; then
+successln "Dockerfile creates successfully."
+
 #three tests
-echo -e "\033[0;32m第一次测试开始...\033[0m"
+infoln "the first test is running..."
 . ../es_c.sh
 if [ $? -eq 0 ]; then
-echo -e "\033[0;32m第一次测试完成\033[0m"
-echo -e "\033[0;32m第二次测试开始...\033[0m"
+successln "the first test completes."
+infoln "the second test is running..."
 n=2
 . ../es_c.sh
 if [ $? -eq 0 ]; then
-echo -e "\033[0;32m第二次测试完成\033[0m"
-echo -e "\033[0;32m第三次测试开始...\033[0m"
+successln "the second test completes."
+infoln "the third test is running..."
 n=3
 . ../es_c.sh
 if [ $? -eq 0 ]; then
-echo -e "\033[0;32m第三次测试完成\033[0m"
+successln "the third test completes."
+else
+errorln "the third test failed."
 fi
+else
+errorln "the second test failed."
 fi
+else 
+errorln "the first test failed."
 fi
 
 
