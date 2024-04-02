@@ -5,7 +5,7 @@
 #the content of every test
 for i in {1..5}
 do
-sed "s/LIMIT 100/LIMIT $((${i}*100000))/g" ./daemon/test_encrypt.go > ./daemon/new2.go
+sed "s/patient_data LIMIT 100/patient_data/g;s/Vedrfolnir LIMIT 100/Vedrfolnir LIMIT $((${i}*100000))/g" ./daemon/test_encrypt.go > ./daemon/new2.go
 
 infoln "in condition of LIMIT $((${i}*100000)),docker es_${i} is building..."
 docker build --no-cache --network=host -t "es_${i}" .
