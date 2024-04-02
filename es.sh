@@ -8,6 +8,7 @@ cd Vedrfolnir
 
 #write Dockerfile
 if [ ! -f "Dockerfile" ];then
+infoln "no Dockerfile,create Dockerfile..."
 touch Dockerfile
 chmod a+x Dockerfile
 echo 'FROM golang:latest
@@ -22,6 +23,7 @@ fi
 
 if [ $? -eq 0 ]; then
 successln "Dockerfile creates successfully."
+fi
 
 #three tests
 infoln "the first test is running..."
@@ -39,13 +41,13 @@ n=3
 if [ $? -eq 0 ]; then
 successln "the third test completes."
 else
-errorln "the third test failed."
+fatalln "the third test failed."
 fi
 else
-errorln "the second test failed."
+fatalln "the second test failed."
 fi
 else 
-errorln "the first test failed."
+fatalln "the first test failed."
 fi
 
 

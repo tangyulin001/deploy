@@ -1,11 +1,12 @@
 #!/bin/bash
 
-. ./utils
+. ../utils
 
 #the content of every test
-for i in {1..5}
+for i in {1..2}
 do
 sed "s/LIMIT 100/LIMIT $((${i}*100))/g" ./daemon/test_encrypt.go > ./daemon/new2.go
+
 infoln "in condition of LIMIT $((${i}*100000)),docker es_${i} is building..."
 docker build --no-cache --network=host -t "es_${i}" .
 
@@ -30,6 +31,6 @@ infoln "delete the data of patient_data..."
 mysql -uroot -p"root1234" foo -e "TRUNCATE TABLE patient_data;"
 
 infoln "the number of table patient_data now is :"
-mysql-ct mysql -uroot -p"root1234" foo -e "select count(*) from patient_data;"
+mysql -uroot -p"root1234" foo -e "select count(*) from patient_data;"
 done
 
